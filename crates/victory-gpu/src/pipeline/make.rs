@@ -649,12 +649,8 @@ fn workers() -> bool {
             std::thread::available_parallelism().map_or(2, |n| n.get()),
         );
         tracing::info!(workers, "pipeline workers");
-<<<<<<< HEAD
         let screens = if screens_first() && workers > 1 { SCREEN_WORKERS } else { 0 };
-=======
-        let screens = if screens_first() { SCREEN_WORKERS } else { 0 };
         guard_start();
->>>>>>> 81ebb7b (RX 9070 XT fixes: magenta filter, VRAM eviction, keep_shown guard, lock-free compiler VEH)
         for i in 0..workers + screens {
             if spawn_worker(i >= workers) {
                 running = true;
