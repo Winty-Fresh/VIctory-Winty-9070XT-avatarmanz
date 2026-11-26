@@ -418,7 +418,7 @@ fn workers() -> bool {
             std::thread::available_parallelism().map_or(2, |n| n.get()),
         );
         tracing::info!(workers, "pipeline workers");
-        let screens = if screens_first() { SCREEN_WORKERS } else { 0 };
+        let screens = if screens_first() && workers > 1 { SCREEN_WORKERS } else { 0 };
         for i in 0..workers + screens {
             let screens_only = i >= workers;
             let spawned = std::thread::Builder::new()
